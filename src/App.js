@@ -1,42 +1,46 @@
-import React from 'react';
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  theme,
-} from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
+import React,{useState,useEffect} from 'react';
+import Layout from './components/layout/Layout';
+import {BrowserRouter as Router,Switch,Route} from 'react-router-dom'
+import {Heading,GridItem} from '@chakra-ui/react';
+import LoginForm from './components/auth/LoginForm';
+import ConfirmForm from './components/auth/ConfirmForm';
+import PrivateRoute from './components/route/PrivateRoute';
+import Dashboard from './components/dashboard/Dashboard';
+import ShowData from './components/dashboard/ShowData';
 
 function App() {
+   
   return (
-    <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Logo h="40vmin" pointerEvents="none" />
-            <Text>
-              Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-            </Text>
-            <Link
-              color="teal.500"
-              href="https://chakra-ui.com"
-              fontSize="2xl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn Chakra
-            </Link>
-          </VStack>
-        </Grid>
-      </Box>
-    </ChakraProvider>
-  );
-}
+    <Router>
+    <Layout>
+    <Switch>
+      <PrivateRoute exact path='/'>
+        <Dashboard/>
+        </PrivateRoute>
+      <PrivateRoute exact path='/showData'>
+        <ShowData />
+        </PrivateRoute> 
+      <Route path="/login">
+        <LoginForm />
+      </Route>
+      <Route path='/confirm'>
+        <ConfirmForm />
+      </Route>
+      <Route>
+      <GridItem
+      colStart={[1, null, null, 2, null, null]}
+      colSpan={[3, null, null, 1, null, null]}
+      p={6}
+    >
+      <Heading as="h1" mb={6}>
+        404 : Page not found
+      </Heading>
+      </GridItem>
+      </Route>
+    </Switch>
+    </Layout>
+    </Router>
+  )
+}    
 
 export default App;
