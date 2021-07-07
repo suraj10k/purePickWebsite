@@ -9,22 +9,24 @@ import {
     Input,
     Button,
     Text,
+    Textarea,
   } from '@chakra-ui/react';
 
-export default function Data({customers}) {
+export default function Data({customers ,thing}) {
     return (
     <GridItem
       colStart={[1, null, null, 2, null, null]}
       colSpan={[3, null, null, 1, null, null]}
       p={6}>
         <Heading as="h1" mb={6}>
-        {customers.Name}
+        {customers.companyName}
       </Heading>
-      <Text fontSize="lg">Order Date : {customers.OrderDate}</Text>
-      <Text fontSize="lg">Order No. : {customers.OrderNo}</Text>
-      <Text fontSize="lg">Price : {customers.Price}$</Text>
-      <Text fontSize="lg">Weight : {customers.Quantity}kg</Text>
-    </GridItem>
+      <Text fontSize="lg">{customers.customerName}</Text>
+      <Text fontSize="lg"> {customers.address}</Text>
+      <Text fontSize="lg">{customers.city}</Text>
+      <Text fontSize="lg">{customers.country}</Text>
+      <Text fontSize="lg">{customers.value}</Text>
+      </GridItem>
     )
 }
 
