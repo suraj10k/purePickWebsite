@@ -3,7 +3,7 @@ import fire from "firebase"
 import Data from './Data';
 const ShowData = () => {
 const [showData,setShowData] = useState();
-
+  
   useEffect( () => {
     const dataRef = fire.database().ref("customer");
     dataRef.on('value',(snapshot) => {
@@ -15,12 +15,11 @@ const [showData,setShowData] = useState();
     setShowData(showData);
     });
   },[]);
-  
-return (
+    return (
         <div>
           {showData ? showData.map((customers,index) => (
               <Data customers={customers} key={index} />
-          )) : " "}   
+          )) : " "}  
         </div>
     )
 }
